@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOCTIS — The City Is Asleep</title>
+  <meta name="description" content="NOCTIS — A quiet, precise electric car brand. In total blackout at night, the car's light is the only light in the world.">
+
+  <!-- Google Fonts: Archivo (Variable wdth, wght), Inter, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,300..400&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="is-loading">
+
+  <!-- FILM GRAIN OVERLAY -->
+  <canvas id="grain-canvas" class="grain-overlay" aria-hidden="true"></canvas>
+
+  <!-- CUSTOM HEADLIGHT CURSOR (Desktop only) -->
+  <div id="custom-cursor" class="custom-cursor" aria-hidden="true">
+    <div class="cursor-ring"></div>
+    <div class="cursor-dot"></div>
+    <div class="cursor-bar"></div>
+    <span class="cursor-label"></span>
+  </div>
+
+  <!-- PRELOADER -->
+  <div id="preloader" class="preloader" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+    <div class="preloader-content">
+      <div class="preloader-wordmark">NOCTIS</div>
+      <div class="preloader-track">
+        <div class="preloader-bar" id="preloader-bar"></div>
+      </div>
+      <div class="preloader-counter" id="preloader-counter">000</div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <header id="site-nav" class="site-nav">
+    <a href="#hero" class="nav-brand" data-cursor-label="NOCTIS">NOCTIS</a>
+    <nav class="nav-links" aria-label="Main Navigation">
+      <a href="#lineup" class="nav-link" data-cursor-label="MODELS">Models</a>
+      <a href="#dismantle" class="nav-link" data-cursor-label="TECH">Technology</a>
+      <a href="#reserve" class="nav-link nav-cta" data-cursor-label="RESERVE">Reserve</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <!-- SECTION 1: HERO (Pinned Scrollytelling) -->
+    <section id="hero" class="scrolly-wrapper hero-wrapper" aria-label="NOCTIS Hero Experience">
+      <div class="scrolly-stage hero-stage">
+        
+        <!-- Canvas for scroll-scrubbed frames -->
+        <canvas id="hero-canvas" class="scrolly-canvas"></canvas>
+        <div class="hero-black-overlay" id="hero-black-overlay" aria-hidden="true"></div>
+
+        <!-- Left-edge HUD -->
+        <aside class="hero-hud" aria-label="Telemetry HUD">
+          <div class="hud-item hud-chapter">
+            <span class="hud-tick" aria-hidden="true"></span>
+            <span class="hud-label">CHAPTER</span>
+            <span class="hud-val" id="hud-chapter-val">01/04</span>
+          </div>
+          <div class="hud-item hud-speed">
+            <span class="hud-label">VELOCITY</span>
+            <span class="hud-val" id="hud-speed-val">000 KM/H</span>
+          </div>
+          <div class="hud-item hud-dist">
+            <span class="hud-label">DISTANCE</span>
+            <span class="hud-val" id="hud-dist-val">0.0 KM</span>
+          </div>
+        </aside>
+
+        <!-- Chapter 1 (0–12%) -->
+        <div class="hero-chapter chapter-01 active" id="hero-ch-1">
+          <div class="line-mask"><h1 class="hero-brand-title">NOCTIS</h1></div>
+          <div class="line-mask"><p class="hero-brand-sub">The city is asleep.</p></div>
+          <div class="hero-scroll-hint">
+            <div class="hint-line" aria-hidden="true"></div>
+            <span class="hint-text">SCROLL TO WAKE IT</span>
+          </div>
+        </div>
+
+        <!-- Chapter 2 (22–40%) -->
+        <div class="hero-chapter chapter-02" id="hero-ch-2">
+          <div class="line-mask"><p class="hero-statement-line">It doesn't need</p></div>
+          <div class="line-mask"><p class="hero-statement-line">the city's light.</p></div>
+        </div>
+
+        <!-- Chapter 3 (50–68%) -->
+        <div class="hero-chapter chapter-03" id="hero-ch-3">
+          <div class="line-mask"><p class="hero-statement-line">It brings its own.</p></div>
+        </div>
+
+        <!-- Chapter 4 (80–100%) -->
+        <div class="hero-chapter chapter-04" id="hero-ch-4">
+          <div class="line-mask"><h2 class="hero-model-title">GT-E</h2></div>
+          <div class="line-mask">
+            <p class="hero-specs-row">0–100 KM/H 3.1S · 640 KM RANGE · DUAL MOTOR</p>
+          </div>
+          <div class="line-mask">
+            <a href="#lineup" class="hero-cta-link" data-cursor-label="EXPLORE">Discover the GT-E →</a>
+          </div>
+        </div>
+
+        <!-- 1px xenon progress bar at bottom -->
+        <div class="section-progress-bar" id="hero-progress-bar" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: STATEMENT (Not pinned, 100vh) -->
+    <section id="statement" class="statement-section" aria-label="Design Statement">
+      <div class="statement-container">
+        <span class="section-mono-tag">02 — ENGINEERING</span>
+        <h2 class="statement-quote" id="statement-quote">
+          <!-- Words wrapped dynamically in spans for scroll opacity reveal -->
+          <span class="statement-word">Every</span>
+          <span class="statement-word">part</span>
+          <span class="statement-word">was</span>
+          <span class="statement-word">designed</span>
+          <span class="statement-word">to</span>
+          <span class="statement-word">disappear</span>
+          <span class="statement-word">into</span>
+          <span class="statement-word">one</span>
+          <span class="statement-word">line</span>
+          <span class="statement-word">of</span>
+          <span class="statement-word">light.</span>
+        </h2>
+      </div>
+    </section>
+
+    <!-- SECTION 3: DISMANTLE (Pinned Scrollytelling, ~350vh) -->
+    <section id="dismantle" class="scrolly-wrapper dismantle-wrapper" aria-label="Engineering Dismantle Sequence">
+      <div class="scrolly-stage dismantle-stage">
+        
+        <!-- Header -->
+        <div class="dismantle-header">
+          <span class="section-mono-tag">ARCHITECTURE</span>
+          <h2 class="dismantle-title">Look closer.</h2>
+        </div>
+
+        <!-- Canvas for dismantle frames -->
+        <canvas id="dismantle-canvas" class="scrolly-canvas"></canvas>
+
+        <!-- Callouts overlay -->
+        <div class="dismantle-callouts-layer" id="dismantle-callouts" aria-hidden="true">
+          <!-- Rendered dynamically / placed via config.js -->
+        </div>
+
+        <!-- 1px xenon progress bar at bottom -->
+        <div class="section-progress-bar" id="dismantle-progress-bar" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: LINEUP (Accordion, 100vh) -->
+    <section id="lineup" class="lineup-section" aria-label="NOCTIS Model Lineup">
+      <div class="lineup-header">
+        <span class="section-mono-tag">03 — THE LINEUP</span>
+        <h2 class="lineup-title">Five ways to drive the night.</h2>
+      </div>
+
+      <div class="lineup-accordion" id="lineup-accordion" role="tablist" aria-label="Vehicles">
+        <!-- Rendered via config.js or inline semantic markup -->
+      </div>
+    </section>
+
+    <!-- SECTION 5: RESERVE (100vh) -->
+    <section id="reserve" class="reserve-section" aria-label="Reserve NOCTIS">
+      <div class="reserve-content">
+        <span class="section-mono-tag">ALLOCATION</span>
+        <h2 class="reserve-title">Drive the night.</h2>
+        <p class="reserve-body">Production begins 2027. Limited allocation available by application.</p>
+        <button type="button" class="reserve-btn" id="reserve-btn" data-cursor-label="RESERVE">
+          <span class="btn-tick" aria-hidden="true"></span>
+          <span class="btn-text">RESERVE YOUR NOCTIS</span>
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="footer-wordmark">NOCTIS</span>
+        <p class="footer-tagline">Quiet. Expensive. Precise.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <span class="footer-col-title">MODELS</span>
+          <ul>
+            <li><a href="#lineup" class="footer-link" data-cursor-label="GT-E">GT-E Coupe</a></li>
+            <li><a href="#lineup" class="footer-link" data-cursor-label="S">S Sport Sedan</a></li>
+            <li><a href="#lineup" class="footer-link" data-cursor-label="X">X Coupe SUV</a></li>
+            <li><a href="#lineup" class="footer-link" data-cursor-label="R">R Track Edition</a></li>
+            <li><a href="#lineup" class="footer-link" data-cursor-label="ONE">ONE Hypercar</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-title">TECHNOLOGY</span>
+          <ul>
+            <li><a href="#dismantle" class="footer-link" data-cursor-label="VIEW">Axial Powertrain</a></li>
+            <li><a href="#dismantle" class="footer-link" data-cursor-label="VIEW">110 kWh Monolith</a></li>
+            <li><a href="#dismantle" class="footer-link" data-cursor-label="VIEW">Photonic Signature</a></li>
+            <li><a href="#statement" class="footer-link" data-cursor-label="VIEW">Aero Composite</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-title">SPECIFICATION</span>
+          <ul>
+            <li><a href="#reserve" class="footer-link" data-cursor-label="APPLY">Allocation Registry</a></li>
+            <li><a href="#reserve" class="footer-link" data-cursor-label="CONFIG">Custom Commission</a></li>
+            <li><a href="#" class="footer-link" data-cursor-label="PRESS">Private Atelier</a></li>
+            <li><a href="#" class="footer-link" data-cursor-label="LEGAL">Legal & Compliance</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 NOCTIS (fictional brand). All rights reserved.</span>
+      <span class="footer-mono">ZERO EMISSIONS · MONOCHROME LUXURY</span>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="config.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
